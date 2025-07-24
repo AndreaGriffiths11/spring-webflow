@@ -79,8 +79,8 @@ public class Message implements Serializable {
 	 * @return {@code true} if the source is a String that has text; {@code false} otherwise.
 	 */
 	public boolean hasField() {
-		if (this.source instanceof String) {
-			return StringUtils.hasText((String) this.source);
+		if (this.source instanceof String string) {
+			return StringUtils.hasText(string);
 		} else {
 			return false;
 		}

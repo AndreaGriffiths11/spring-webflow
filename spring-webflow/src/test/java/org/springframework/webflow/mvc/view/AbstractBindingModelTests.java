@@ -138,7 +138,7 @@ public abstract class AbstractBindingModelTests {
 		assertEquals(null, error.getRejectedValue());
 		assertTrue(!error.isBindingFailure());
 
-		FieldError error2 = model.getFieldErrors().get(0);
+		FieldError error2 = model.getFieldErrors().getFirst();
 		assertEquals(error, error2);
 	}
 
@@ -171,7 +171,7 @@ public abstract class AbstractBindingModelTests {
 		assertTrue(int.class.equals(clazz) || Integer.class.equals(clazz));
 
 		messages.addMessage(new MessageBuilder().source("nestedBean.datum2").error().defaultText("Error").build());
-		assertNotNull(model.getFieldErrors("datum2").get(0));
+		assertNotNull(model.getFieldErrors("datum2").getFirst());
 		model.popNestedPath();
 		assertEquals("", model.getFieldValue("datum1"));
 	}

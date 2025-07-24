@@ -55,8 +55,7 @@ public class FlowResourceELResolver extends ELResolver {
 		if (base == null && RESOURCE_BUNDLE_KEY.equals(property)) {
 			context.setPropertyResolved(true);
 			return MessageSource.class;
-		} else if (base instanceof MessageSource) {
-			MessageSource messageSource = (MessageSource) base;
+		} else if (base instanceof MessageSource messageSource) {
 			String message = messageSource.getMessage(property.toString(), null, null, getLocale());
 			if (StringUtils.hasText(message)) {
 				context.setPropertyResolved(true);
@@ -74,8 +73,7 @@ public class FlowResourceELResolver extends ELResolver {
 		if (base == null && RESOURCE_BUNDLE_KEY.equals(property)) {
 			context.setPropertyResolved(true);
 			return getMessageSource();
-		} else if (base instanceof MessageSource) {
-			MessageSource messageSource = (MessageSource) base;
+		} else if (base instanceof MessageSource messageSource) {
 			String message = messageSource.getMessage(property.toString(), null, null, getLocale());
 			if (StringUtils.hasText(message)) {
 				context.setPropertyResolved(true);

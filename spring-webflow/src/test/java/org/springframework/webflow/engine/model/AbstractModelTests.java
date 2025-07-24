@@ -92,10 +92,10 @@ public class AbstractModelTests {
 		AbstractModel obj = new PersistenceContextModel();
 		LinkedList<SecuredModel> result = obj.merge(child, parent, false);
 		assertEquals(3, result.size());
-		assertEquals("2", result.get(0).getAttributes());
+		assertEquals("2", result.getFirst().getAttributes());
 		assertEquals("1", result.get(1).getAttributes());
 		assertEquals("3", result.get(2).getAttributes());
-		assertNotSame(parent.get(0), result.get(1));
+		assertNotSame(parent.getFirst(), result.get(1));
 		assertEquals("foo", result.get(2).getMatch());
 	}
 
@@ -112,10 +112,10 @@ public class AbstractModelTests {
 		AbstractModel obj = new PersistenceContextModel();
 		LinkedList<SecuredModel> result = obj.merge(child, parent, true);
 		assertEquals(3, result.size());
-		assertEquals("1", result.get(0).getAttributes());
+		assertEquals("1", result.getFirst().getAttributes());
 		assertEquals("3", result.get(1).getAttributes());
 		assertEquals("2", result.get(2).getAttributes());
-		assertNotSame(parent.get(0), result.get(1));
+		assertNotSame(parent.getFirst(), result.get(1));
 		assertEquals("foo", result.get(1).getMatch());
 	}
 
@@ -127,7 +127,7 @@ public class AbstractModelTests {
 		LinkedList<SecuredModel> parent = null;
 		LinkedList<SecuredModel> result = obj.merge(child, parent);
 		assertEquals(1, result.size());
-		assertEquals("1", result.get(0).getAttributes());
+		assertEquals("1", result.getFirst().getAttributes());
 	}
 
 	@Test
@@ -138,8 +138,8 @@ public class AbstractModelTests {
 		AbstractModel obj = new PersistenceContextModel();
 		LinkedList<SecuredModel> result = obj.merge(child, parent);
 		assertEquals(1, result.size());
-		assertEquals("2", result.get(0).getAttributes());
-		assertNotSame(parent.get(0), result.get(0));
+		assertEquals("2", result.getFirst().getAttributes());
+		assertNotSame(parent.getFirst(), result.getFirst());
 	}
 
 	@Test

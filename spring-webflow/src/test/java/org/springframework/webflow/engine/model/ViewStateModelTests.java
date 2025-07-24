@@ -102,13 +102,13 @@ public class ViewStateModelTests {
 		assertEquals("fooModel", child.getModel());
 		assertEquals("foo", child.getValidationHints());
 		assertEquals("fooView", child.getView());
-		assertEquals("bar", child.getAttributes().get(0).getValue());
-		assertEquals("foo", child.getBinder().getBindings().get(0).getProperty());
-		assertEquals("bar", child.getTransitions().get(0).getTo());
-		assertEquals("foo.bar", ((EvaluateModel) child.getOnEntryActions().get(0)).getExpression());
-		assertEquals("foo.bar", ((EvaluateModel) child.getOnExitActions().get(0)).getExpression());
-		assertEquals("foo.bar", ((EvaluateModel) child.getOnRenderActions().get(0)).getExpression());
-		assertEquals("foo", child.getVars().get(0).getName());
-		assertEquals("foo", child.getExceptionHandlers().get(0).getBean());
+		assertEquals("bar", child.getAttributes().getFirst().getValue());
+		assertEquals("foo", child.getBinder().getBindings().getFirst().getProperty());
+		assertEquals("bar", child.getTransitions().getFirst().getTo());
+		assertEquals("foo.bar", ((EvaluateModel) child.getOnEntryActions().getFirst()).getExpression());
+		assertEquals("foo.bar", ((EvaluateModel) child.getOnExitActions().getFirst()).getExpression());
+		assertEquals("foo.bar", ((EvaluateModel) child.getOnRenderActions().getFirst()).getExpression());
+		assertEquals("foo", child.getVars().getFirst().getName());
+		assertEquals("foo", child.getExceptionHandlers().getFirst().getBean());
 	}
 }

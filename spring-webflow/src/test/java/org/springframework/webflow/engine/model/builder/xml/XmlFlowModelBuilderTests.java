@@ -55,7 +55,7 @@ public class XmlFlowModelBuilderTests {
 		builder.build();
 		FlowModel flow = builder.getFlowModel();
 		assertNull(flow.getStartStateId());
-		assertEquals("end", flow.getStates().get(0).getId());
+		assertEquals("end", flow.getStates().getFirst().getId());
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class XmlFlowModelBuilderTests {
 		builder.build();
 		FlowModel flow = builder.getFlowModel();
 		assertNull(flow.getStartStateId());
-		assertEquals("end", flow.getStates().get(0).getId());
+		assertEquals("end", flow.getStates().getFirst().getId());
 	}
 
 	@Test
@@ -86,7 +86,7 @@ public class XmlFlowModelBuilderTests {
 		builder.init();
 		builder.build();
 		FlowModel flow = builder.getFlowModel();
-		assertEquals("bar", flow.getAttributes().get(0).getValue());
+		assertEquals("bar", flow.getAttributes().getFirst().getValue());
 		assertEquals("number", flow.getAttributes().get(1).getName());
 	}
 
@@ -119,7 +119,7 @@ public class XmlFlowModelBuilderTests {
 		builder.init();
 		builder.build();
 		FlowModel flow = builder.getFlowModel();
-		SecuredModel secured = flow.getStates().get(0).getSecured();
+		SecuredModel secured = flow.getStates().getFirst().getSecured();
 		assertNotNull(secured);
 		assertEquals("ROLE_USER", secured.getAttributes());
 	}
@@ -131,7 +131,7 @@ public class XmlFlowModelBuilderTests {
 		builder.init();
 		builder.build();
 		FlowModel flow = builder.getFlowModel();
-		SecuredModel secured = flow.getGlobalTransitions().get(0).getSecured();
+		SecuredModel secured = flow.getGlobalTransitions().getFirst().getSecured();
 		assertNotNull(secured);
 		assertEquals("ROLE_USER", secured.getAttributes());
 	}
@@ -143,7 +143,7 @@ public class XmlFlowModelBuilderTests {
 		builder.init();
 		builder.build();
 		FlowModel flow = builder.getFlowModel();
-		assertEquals("flow-foo", flow.getVars().get(0).getName());
+		assertEquals("flow-foo", flow.getVars().getFirst().getName());
 		assertEquals("conversation-foo", flow.getVars().get(1).getName());
 	}
 
@@ -154,7 +154,7 @@ public class XmlFlowModelBuilderTests {
 		builder.init();
 		builder.build();
 		FlowModel flow = builder.getFlowModel();
-		assertEquals("foo", ((ViewStateModel) flow.getStates().get(0)).getVars().get(0).getName());
+		assertEquals("foo", ((ViewStateModel) flow.getStates().getFirst()).getVars().getFirst().getName());
 	}
 
 	@Test
@@ -164,11 +164,11 @@ public class XmlFlowModelBuilderTests {
 		builder.init();
 		builder.build();
 		FlowModel flow = builder.getFlowModel();
-		ViewStateModel model = (ViewStateModel) flow.getStates().get(0);
+		ViewStateModel model = (ViewStateModel) flow.getStates().getFirst();
 		assertEquals("formObject", model.getModel());
 		assertEquals("foo,bar", model.getValidationHints());
-		assertEquals("objectProperty", model.getBinder().getBindings().get(0).getProperty());
-		assertEquals("customConverter", model.getBinder().getBindings().get(0).getConverter());
+		assertEquals("objectProperty", model.getBinder().getBindings().getFirst().getProperty());
+		assertEquals("customConverter", model.getBinder().getBindings().getFirst().getConverter());
 	}
 
 	@Test
@@ -178,7 +178,7 @@ public class XmlFlowModelBuilderTests {
 		builder.init();
 		builder.build();
 		FlowModel flow = builder.getFlowModel();
-		assertEquals("true", ((ViewStateModel) flow.getStates().get(0)).getRedirect());
+		assertEquals("true", ((ViewStateModel) flow.getStates().getFirst()).getRedirect());
 	}
 
 	@Test
@@ -188,7 +188,7 @@ public class XmlFlowModelBuilderTests {
 		builder.init();
 		builder.build();
 		FlowModel flow = builder.getFlowModel();
-		assertEquals("true", ((ViewStateModel) flow.getStates().get(0)).getPopup());
+		assertEquals("true", ((ViewStateModel) flow.getStates().getFirst()).getPopup());
 	}
 
 	@Test
@@ -202,7 +202,7 @@ public class XmlFlowModelBuilderTests {
 		FlowModel flow = registry.getFlowModel("child");
 		assertEquals(1, flow.getGlobalTransitions().size());
 		assertEquals(2, flow.getStates().size());
-		assertEquals("view", flow.getStates().get(0).getId());
+		assertEquals("view", flow.getStates().getFirst().getId());
 	}
 
 	@Test
@@ -241,7 +241,7 @@ public class XmlFlowModelBuilderTests {
 				registry)));
 		FlowModel flow = registry.getFlowModel("child");
 		assertEquals(1, flow.getStates().size());
-		assertEquals("otherview", ((ViewStateModel) flow.getStates().get(0)).getView());
+		assertEquals("otherview", ((ViewStateModel) flow.getStates().getFirst()).getView());
 	}
 
 	@Test
@@ -315,12 +315,12 @@ public class XmlFlowModelBuilderTests {
 		XmlFlowModelBuilder builder = new XmlFlowModelBuilder(res);
 		DefaultFlowModelHolder holder = new DefaultFlowModelHolder(builder);
 		FlowModel model = holder.getFlowModel();
-		assertEquals("foo1", model.getExceptionHandlers().get(0).getBean());
-		assertEquals("foo2", model.getStateById("state1").getExceptionHandlers().get(0).getBean());
-		assertEquals("foo3", model.getStateById("state2").getExceptionHandlers().get(0).getBean());
-		assertEquals("foo4", model.getStateById("state3").getExceptionHandlers().get(0).getBean());
-		assertEquals("foo5", model.getStateById("state4").getExceptionHandlers().get(0).getBean());
-		assertEquals("foo6", model.getStateById("state5").getExceptionHandlers().get(0).getBean());
+		assertEquals("foo1", model.getExceptionHandlers().getFirst().getBean());
+		assertEquals("foo2", model.getStateById("state1").getExceptionHandlers().getFirst().getBean());
+		assertEquals("foo3", model.getStateById("state2").getExceptionHandlers().getFirst().getBean());
+		assertEquals("foo4", model.getStateById("state3").getExceptionHandlers().getFirst().getBean());
+		assertEquals("foo5", model.getStateById("state4").getExceptionHandlers().getFirst().getBean());
+		assertEquals("foo6", model.getStateById("state5").getExceptionHandlers().getFirst().getBean());
 	}
 
 	@Test
@@ -369,7 +369,7 @@ public class XmlFlowModelBuilderTests {
 		ViewStateModel state = (ViewStateModel) model.getStateById("state1");
 		assertEquals("foo,bar", state.getValidationHints());
 
-		TransitionModel transition = state.getTransitions().get(0);
+		TransitionModel transition = state.getTransitions().getFirst();
 		assertEquals("baz", transition.getValidationHints());
 
 		state = (ViewStateModel) model.getStateById("state2");

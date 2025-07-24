@@ -34,8 +34,7 @@ class DefaultFlowRegistry extends FlowDefinitionRegistryImpl {
 
 	public void setParent(FlowDefinitionRegistry parent) {
 		super.setParent(parent);
-		if (parent instanceof DefaultFlowRegistry) {
-			DefaultFlowRegistry parentFlowRegistry = (DefaultFlowRegistry) parent;
+		if (parent instanceof DefaultFlowRegistry parentFlowRegistry) {
 			// link so a flow in the child registry that extends from a flow in the parent registry can find its parent
 			flowModelRegistry.setParent(parentFlowRegistry.getFlowModelRegistry());
 		}

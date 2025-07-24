@@ -118,8 +118,8 @@ public class FlowViewHandler extends ViewHandlerWrapper {
 		RequestContext context = RequestContextHolder.getRequestContext();
 		ViewRootHolder holder = (ViewRootHolder) context.getFlashScope().get(View.USER_EVENT_STATE_ATTRIBUTE);
 		if (holder != null && holder.getViewRoot() != null && holder.getViewRoot().getViewId().equals(resourcePath)) {
-			if (facesContext instanceof FlowFacesContext) {
-				((FlowFacesContext) facesContext).setViewRootRestoredFromFlashScope();
+			if (facesContext instanceof FlowFacesContext flowFacesContext) {
+				flowFacesContext.setViewRootRestoredFromFlashScope();
 			}
 			return holder.getViewRoot();
 		} else {

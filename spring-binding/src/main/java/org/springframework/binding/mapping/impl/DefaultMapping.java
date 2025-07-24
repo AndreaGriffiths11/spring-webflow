@@ -139,8 +139,8 @@ public class DefaultMapping implements Mapping {
 	}
 
 	private boolean isEmptyString(Object sourceValue) {
-		if (sourceValue instanceof CharSequence) {
-			return ((CharSequence) sourceValue).length() == 0;
+		if (sourceValue instanceof CharSequence sequence) {
+			return sequence.length() == 0;
 		} else {
 			return false;
 		}

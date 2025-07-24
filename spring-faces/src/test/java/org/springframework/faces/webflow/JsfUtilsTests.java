@@ -41,7 +41,7 @@ public class JsfUtilsTests extends AbstractJsfTestCase {
 		PhaseListener listener3 = new OrderVerifyingPhaseListener(null, list);
 		lifecycle.addPhaseListener(listener3);
 		JsfUtils.notifyBeforeListeners(PhaseId.ANY_PHASE, lifecycle, new MockFacesContext());
-		assertEquals(listener1, list.get(0));
+		assertEquals(listener1, list.getFirst());
 		assertEquals(listener2, list.get(1));
 		assertEquals(listener3, list.get(2));
 	}
@@ -57,7 +57,7 @@ public class JsfUtilsTests extends AbstractJsfTestCase {
 		PhaseListener listener3 = new OrderVerifyingPhaseListener(list, null);
 		lifecycle.addPhaseListener(listener3);
 		JsfUtils.notifyAfterListeners(PhaseId.ANY_PHASE, lifecycle, new MockFacesContext());
-		assertEquals(listener3, list.get(0));
+		assertEquals(listener3, list.getFirst());
 		assertEquals(listener2, list.get(1));
 		assertEquals(listener1, list.get(2));
 	}

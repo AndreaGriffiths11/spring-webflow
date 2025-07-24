@@ -665,8 +665,7 @@ public class FormAction extends MultiAction implements InitializingBean {
 	 */
 	private boolean formErrorsValid(RequestContext context, Object formObject) {
 		Errors errors = getFormObjectAccessor(context).getFormErrors(getFormObjectName(), getFormErrorsScope());
-		if (errors instanceof BindingResult) {
-			BindingResult be = (BindingResult) errors;
+		if (errors instanceof BindingResult be) {
 			if (be.getTarget() != formObject) {
 				if (logger.isInfoEnabled()) {
 					logger.info("Inconsistency detected: the Errors instance in '" + getFormErrorsScope()
@@ -882,7 +881,7 @@ public class FormAction extends MultiAction implements InitializingBean {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Creating new instance of form object class [" + getFormObjectClass() + "]");
 		}
-		return getFormObjectClass().newInstance();
+		return getFormObjectClass().getDeclaredConstructor().newInstance();
 	}
 
 	/**

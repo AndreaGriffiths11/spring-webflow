@@ -208,16 +208,16 @@ public class FlowModelFlowBuilder extends AbstractFlowBuilder {
 			throw new FlowBuilderException("At least one state is required to build a Flow");
 		}
 		for (AbstractStateModel state : flowModel.getStates()) {
-			if (state instanceof ActionStateModel) {
-				parseAndAddActionState((ActionStateModel) state, getFlow());
-			} else if (state instanceof ViewStateModel) {
-				parseAndAddViewState((ViewStateModel) state, getFlow());
-			} else if (state instanceof DecisionStateModel) {
-				parseAndAddDecisionState((DecisionStateModel) state, getFlow());
-			} else if (state instanceof SubflowStateModel) {
-				parseAndAddSubflowState((SubflowStateModel) state, getFlow());
-			} else if (state instanceof EndStateModel) {
-				parseAndAddEndState((EndStateModel) state, getFlow());
+			if (state instanceof ActionStateModel model) {
+				parseAndAddActionState(model, getFlow());
+			} else if (state instanceof ViewStateModel model) {
+				parseAndAddViewState(model, getFlow());
+			} else if (state instanceof DecisionStateModel model) {
+				parseAndAddDecisionState(model, getFlow());
+			} else if (state instanceof SubflowStateModel model) {
+				parseAndAddSubflowState(model, getFlow());
+			} else if (state instanceof EndStateModel model) {
+				parseAndAddEndState(model, getFlow());
 			}
 		}
 		if (flowModel.getStartStateId() != null) {
@@ -353,9 +353,9 @@ public class FlowModelFlowBuilder extends AbstractFlowBuilder {
 	private GenericApplicationContext createFlowApplicationContext(Resource[] resources) {
 		ApplicationContext parent = getContext().getApplicationContext();
 		GenericApplicationContext flowContext;
-		if (parent instanceof WebApplicationContext) {
+		if (parent instanceof WebApplicationContext context) {
 			GenericWebApplicationContext webContext = new GenericWebApplicationContext();
-			webContext.setServletContext(((WebApplicationContext) parent).getServletContext());
+			webContext.setServletContext(context.getServletContext());
 			flowContext = webContext;
 		} else {
 			flowContext = new GenericApplicationContext();
@@ -870,12 +870,12 @@ public class FlowModelFlowBuilder extends AbstractFlowBuilder {
 			List<AnnotatedAction> actions = new ArrayList<>(actionModels.size());
 			for (AbstractActionModel actionModel : actionModels) {
 				Action action;
-				if (actionModel instanceof EvaluateModel) {
-					action = parseEvaluateAction((EvaluateModel) actionModel);
-				} else if (actionModel instanceof RenderModel) {
-					action = parseRenderAction((RenderModel) actionModel);
-				} else if (actionModel instanceof SetModel) {
-					action = parseSetAction((SetModel) actionModel);
+				if (actionModel instanceof EvaluateModel model) {
+					action = parseEvaluateAction(model);
+				} else if (actionModel instanceof RenderModel model) {
+					action = parseRenderAction(model);
+				} else if (actionModel instanceof SetModel model) {
+					action = parseSetAction(model);
 				} else {
 					action = null;
 				}

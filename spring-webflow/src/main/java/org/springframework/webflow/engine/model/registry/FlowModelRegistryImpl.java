@@ -76,8 +76,8 @@ public class FlowModelRegistryImpl implements FlowModelRegistry, FlowModelHolder
 		try {
 			return getLocalFlowModelHolder(id);
 		} catch (NoSuchFlowModelException e) {
-			if (parent != null && parent instanceof FlowModelHolderLocator) {
-				return ((FlowModelHolderLocator) parent).getFlowModelHolder(id);
+			if (parent != null && parent instanceof FlowModelHolderLocator locator) {
+				return locator.getFlowModelHolder(id);
 			}
 			throw e;
 		}

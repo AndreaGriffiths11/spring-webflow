@@ -102,8 +102,7 @@ public class MessageContextErrors extends AbstractErrors {
 		for (ObjectError error : errors.getAllErrors()) {
 			MessageBuilder builder = new MessageBuilder().error().codes(error.getCodes()).args(error.getArguments())
 					.defaultText(error.getDefaultMessage());
-			if (error instanceof FieldError) {
-				FieldError fieldError = (FieldError) error;
+			if (error instanceof FieldError fieldError) {
 				builder.source(fieldError.getField());
 			}
 			messageContext.addMessage(builder.build());
@@ -144,7 +143,7 @@ public class MessageContextErrors extends AbstractErrors {
 		if (mappingResults != null) {
 			List<MappingResult> results = mappingResults.getResults(new PropertyErrorMappingResult(field));
 			if (!results.isEmpty()) {
-				MappingResult fieldError = results.get(0);
+				MappingResult fieldError = results.getFirst();
 				return fieldError.getOriginalValue();
 			}
 		}

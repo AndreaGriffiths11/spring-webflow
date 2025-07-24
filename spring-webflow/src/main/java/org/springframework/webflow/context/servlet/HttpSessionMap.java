@@ -61,9 +61,9 @@ public class HttpSessionMap extends StringKeyedMapAdapter<Object> implements Sha
 			return null;
 		}
 		Object value = session.getAttribute(key);
-		if (value instanceof HttpSessionMapBindingListener) {
+		if (value instanceof HttpSessionMapBindingListener listener) {
 			// unwrap
-			return ((HttpSessionMapBindingListener) value).getListener();
+			return listener.getListener();
 		} else {
 			return value;
 		}
@@ -72,9 +72,9 @@ public class HttpSessionMap extends StringKeyedMapAdapter<Object> implements Sha
 	protected void setAttribute(String key, Object value) {
 		// force session creation
 		HttpSession session = request.getSession(true);
-		if (value instanceof AttributeMapBindingListener) {
+		if (value instanceof AttributeMapBindingListener listener) {
 			// wrap
-			session.setAttribute(key, new HttpSessionMapBindingListener((AttributeMapBindingListener) value, this));
+			session.setAttribute(key, new HttpSessionMapBindingListener(listener, this));
 		} else {
 			session.setAttribute(key, value);
 		}

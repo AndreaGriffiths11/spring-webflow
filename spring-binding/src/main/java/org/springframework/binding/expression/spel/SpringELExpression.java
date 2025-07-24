@@ -88,8 +88,8 @@ public class SpringELExpression implements Expression {
 	public Object getValue(Object rootObject) throws EvaluationException {
 		try {
 			EvaluationContext context = contextFactory.createContext(rootObject);
-			if (context instanceof StandardEvaluationContext) {
-				extendEvaluationContext((StandardEvaluationContext) context);
+			if (context instanceof StandardEvaluationContext evaluationContext) {
+				extendEvaluationContext(evaluationContext);
 			}
 			return expression.getValue(context, expectedType);
 		} catch (SpelEvaluationException e) {
@@ -109,8 +109,8 @@ public class SpringELExpression implements Expression {
 	public Class<?> getValueType(Object rootObject) throws EvaluationException {
 		try {
 			EvaluationContext context = contextFactory.createContext(rootObject);
-			if (context instanceof StandardEvaluationContext) {
-				extendEvaluationContext((StandardEvaluationContext) context);
+			if (context instanceof StandardEvaluationContext evaluationContext) {
+				extendEvaluationContext(evaluationContext);
 			}
 			return expression.getValueType(context);
 		} catch (SpelEvaluationException e) {
@@ -127,8 +127,8 @@ public class SpringELExpression implements Expression {
 	public void setValue(Object rootObject, Object value) throws EvaluationException {
 		try {
 			EvaluationContext context = contextFactory.createContext(rootObject);
-			if (context instanceof StandardEvaluationContext) {
-				extendEvaluationContext((StandardEvaluationContext) context);
+			if (context instanceof StandardEvaluationContext evaluationContext) {
+				extendEvaluationContext(evaluationContext);
 			}
 			expression.setValue(context, value);
 		} catch (SpelEvaluationException e) {

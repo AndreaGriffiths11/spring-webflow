@@ -58,8 +58,8 @@ public class DefaultNumberFormatFactory extends AbstractNumberFormatFactory {
 	protected NumberFormat getNumberFormat(Locale locale) {
 		NumberFormat format = NumberFormat.getInstance(locale);
 		if (pattern != null) {
-			if (format instanceof DecimalFormat) {
-				((DecimalFormat) format).applyPattern(pattern);
+			if (format instanceof DecimalFormat decimalFormat) {
+				decimalFormat.applyPattern(pattern);
 			} else {
 				logger.warn("Unable to apply format pattern '" + pattern
 						+ "'; Returned NumberFormat is not a DecimalFormat");

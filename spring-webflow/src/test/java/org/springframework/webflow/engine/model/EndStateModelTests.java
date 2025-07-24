@@ -60,6 +60,6 @@ public class EndStateModelTests {
 
 		child.merge(parent);
 		assertEquals("true", child.getCommit());
-		assertEquals("bar", child.getOutputs().get(0).getValue());
+		assertEquals("bar", child.getOutputs().getFirst().getValue());
 	}
 }

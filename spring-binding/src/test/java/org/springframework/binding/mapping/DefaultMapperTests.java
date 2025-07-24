@@ -69,7 +69,7 @@ public class DefaultMapperTests {
 		bean1.put("boop", "bogus");
 		TestBean2 bean2 = new TestBean2();
 		MappingResults results = mapper.map(bean1, bean2);
-		assertEquals("typeMismatch", results.getErrorResults().get(0).getCode());
+		assertEquals("typeMismatch", results.getErrorResults().getFirst().getCode());
 	}
 
 	public static class TestBean {

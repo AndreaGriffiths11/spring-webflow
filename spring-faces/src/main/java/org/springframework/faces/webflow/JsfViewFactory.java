@@ -167,8 +167,8 @@ public class JsfViewFactory implements ViewFactory {
 
 		// Only resetting the valid flag in the RESTORE_VIEW phase,
 		// not during RENDER_RESPONSE
-		if (!context.getRenderResponse() && component instanceof EditableValueHolder) {
-			((EditableValueHolder) component).setValid(true);
+		if (!context.getRenderResponse() && component instanceof EditableValueHolder holder) {
+			holder.setValid(true);
 		}
 
 		ValueExpression binding = component.getValueExpression("binding");

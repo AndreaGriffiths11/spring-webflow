@@ -73,8 +73,8 @@ public class EvaluateAction extends AbstractAction {
 
 	protected Event doExecute(RequestContext context) throws Exception {
 		Object result = expression.getValue(context);
-		if (result instanceof Action) {
-			return ActionExecutor.execute((Action) result, context);
+		if (result instanceof Action action) {
+			return ActionExecutor.execute(action, context);
 		} else {
 			if (resultExpression != null) {
 				resultExpression.setValue(context, result);

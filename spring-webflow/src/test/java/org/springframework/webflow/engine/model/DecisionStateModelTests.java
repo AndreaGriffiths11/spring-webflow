@@ -59,7 +59,7 @@ public class DecisionStateModelTests {
 
 		child.merge(parent);
 		assertNotNull(child.getSecured());
-		assertNotNull("test", child.getIfs().get(0).getTest());
+		assertNotNull("test", child.getIfs().getFirst().getTest());
 	}
 
 }

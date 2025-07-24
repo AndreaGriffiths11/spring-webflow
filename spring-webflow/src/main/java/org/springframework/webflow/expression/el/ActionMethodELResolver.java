@@ -58,8 +58,7 @@ public class ActionMethodELResolver extends ELResolver {
 	}
 
 	public Object getValue(ELContext elContext, Object base, Object property) {
-		if (base instanceof Action) {
-			Action action = (Action) base;
+		if (base instanceof Action action) {
 			elContext.setPropertyResolved(true);
 			AnnotatedAction annotated = new AnnotatedAction(action);
 			annotated.setMethod(property.toString());

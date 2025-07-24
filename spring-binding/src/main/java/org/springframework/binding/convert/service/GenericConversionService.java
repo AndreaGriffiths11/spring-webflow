@@ -116,8 +116,7 @@ public class GenericConversionService implements ConversionService {
 	 */
 	public void addConverter(Converter converter) {
 		((ConverterRegistry) delegate).addConverter(new SpringBindingConverterAdapter(converter));
-		if (converter instanceof TwoWayConverter) {
-			TwoWayConverter twoWayConverter = (TwoWayConverter) converter;
+		if (converter instanceof TwoWayConverter twoWayConverter) {
 			((ConverterRegistry) delegate).addConverter(new SpringBindingConverterAdapter(new ReverseConverter(
 					twoWayConverter)));
 		}
@@ -198,8 +197,7 @@ public class GenericConversionService implements ConversionService {
 							targetComponentType, converter);
 					return new StaticConversionExecutor(sourceClass, targetClass, new ArrayToArray(elementConverter));
 				} else if (converter.getTargetClass().isAssignableFrom(sourceComponentType)
-						&& converter instanceof TwoWayConverter) {
-					TwoWayConverter twoWay = (TwoWayConverter) converter;
+						&& converter instanceof TwoWayConverter twoWay) {
 					ConversionExecutor elementConverter = new StaticConversionExecutor(sourceComponentType,
 							targetComponentType, new ReverseConverter(twoWay));
 					return new StaticConversionExecutor(sourceClass, targetClass, new ArrayToArray(elementConverter));
@@ -223,8 +221,7 @@ public class GenericConversionService implements ConversionService {
 					return new StaticConversionExecutor(sourceClass, targetClass, new ArrayToCollection(
 							elementConverter));
 				} else if (converter.getTargetClass().isAssignableFrom(sourceComponentType)
-						&& converter instanceof TwoWayConverter) {
-					TwoWayConverter twoWay = (TwoWayConverter) converter;
+						&& converter instanceof TwoWayConverter twoWay) {
 					ConversionExecutor elementConverter = new StaticConversionExecutor(sourceComponentType,
 							converter.getSourceClass(), new ReverseConverter(twoWay));
 					return new StaticConversionExecutor(sourceClass, targetClass, new ArrayToCollection(
@@ -248,8 +245,7 @@ public class GenericConversionService implements ConversionService {
 					Converter collectionToArray = new ReverseConverter(new ArrayToCollection(elementConverter));
 					return new StaticConversionExecutor(sourceClass, targetClass, collectionToArray);
 				} else if (converter.getSourceClass().isAssignableFrom(targetComponentType)
-						&& converter instanceof TwoWayConverter) {
-					TwoWayConverter twoWay = (TwoWayConverter) converter;
+						&& converter instanceof TwoWayConverter twoWay) {
 					ConversionExecutor elementConverter = new StaticConversionExecutor(converter.getTargetClass(),
 							targetComponentType, new ReverseConverter(twoWay));
 					Converter collectionToArray = new ReverseConverter(new ArrayToCollection(elementConverter));
@@ -272,14 +268,13 @@ public class GenericConversionService implements ConversionService {
 							targetComponentType, converter);
 					return new StaticConversionExecutor(sourceClass, targetClass, new ObjectToArray(elementConverter));
 				} else if (converter.getTargetClass().isAssignableFrom(sourceClass)
-						&& converter instanceof TwoWayConverter) {
+						&& converter instanceof TwoWayConverter twoWay) {
 					if (!converter.getSourceClass().isAssignableFrom(targetComponentType)) {
 						throw new ConversionExecutorNotFoundException(sourceClass, targetClass,
 								"Custom ConversionExecutor with id '" + id + "' cannot convert from sourceClass ["
 										+ sourceClass.getName() + "] to array holding elements of type ["
 										+ targetComponentType.getName() + "]");
 					}
-					TwoWayConverter twoWay = (TwoWayConverter) converter;
 					ConversionExecutor elementConverter = new StaticConversionExecutor(sourceClass,
 							targetComponentType, new ReverseConverter(twoWay));
 					return new StaticConversionExecutor(sourceClass, targetClass, new ObjectToArray(elementConverter));
@@ -290,9 +285,9 @@ public class GenericConversionService implements ConversionService {
 			if (Collection.class.isAssignableFrom(sourceClass)) {
 				ConversionExecutor elementConverter;
 				// type erasure forces us to do runtime checks of list elements
-				if (converter instanceof TwoWayConverter) {
+				if (converter instanceof TwoWayConverter wayConverter) {
 					elementConverter = new TwoWayCapableConversionExecutor(converter.getSourceClass(),
-							converter.getTargetClass(), (TwoWayConverter) converter);
+							converter.getTargetClass(), wayConverter);
 				} else {
 					elementConverter = new StaticConversionExecutor(converter.getSourceClass(),
 							converter.getTargetClass(), converter);
@@ -302,9 +297,9 @@ public class GenericConversionService implements ConversionService {
 			} else {
 				ConversionExecutor elementConverter;
 				// type erasure forces us to do runtime checks of list elements
-				if (converter instanceof TwoWayConverter) {
+				if (converter instanceof TwoWayConverter wayConverter) {
 					elementConverter = new TwoWayCapableConversionExecutor(sourceClass, converter.getTargetClass(),
-							(TwoWayConverter) converter);
+							wayConverter);
 				} else {
 					elementConverter = new StaticConversionExecutor(sourceClass, converter.getTargetClass(), converter);
 				}
@@ -322,13 +317,12 @@ public class GenericConversionService implements ConversionService {
 								+ sourceClass.getName() + "] to targetClass [" + targetClass.getName() + "]");
 			}
 			return new StaticConversionExecutor(sourceClass, targetClass, converter);
-		} else if (converter.getTargetClass().isAssignableFrom(sourceClass) && converter instanceof TwoWayConverter) {
+		} else if (converter.getTargetClass().isAssignableFrom(sourceClass) && converter instanceof TwoWayConverter twoWay) {
 			if (!converter.getSourceClass().isAssignableFrom(targetClass)) {
 				throw new ConversionExecutorNotFoundException(sourceClass, targetClass,
 						"Custom ConversionExecutor with id '" + id + "' cannot convert from sourceClass ["
 								+ sourceClass.getName() + "] to targetClass [" + targetClass.getName() + "]");
 			}
-			TwoWayConverter twoWay = (TwoWayConverter) converter;
 			return new StaticConversionExecutor(sourceClass, targetClass, new ReverseConverter(twoWay));
 		} else {
 			throw new ConversionExecutorNotFoundException(sourceClass, targetClass,

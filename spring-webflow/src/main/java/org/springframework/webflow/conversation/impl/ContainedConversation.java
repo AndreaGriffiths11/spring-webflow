@@ -125,7 +125,7 @@ public class ContainedConversation implements Conversation, Serializable {
 	// id based equality
 
 	public boolean equals(Object obj) {
-		return obj instanceof ContainedConversation && this.id.equals(((ContainedConversation) obj).id);
+		return obj instanceof ContainedConversation cc && this.id.equals(cc.id);
 	}
 
 	public int hashCode() {

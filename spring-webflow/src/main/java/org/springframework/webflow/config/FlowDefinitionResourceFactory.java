@@ -135,8 +135,7 @@ public class FlowDefinitionResourceFactory {
 	 * @return the flow definition resources
 	 */
 	public FlowDefinitionResource[] createResources(String pattern, AttributeMap<Object> attributes) throws IOException {
-		if (resourceLoader instanceof ResourcePatternResolver) {
-			ResourcePatternResolver resolver = (ResourcePatternResolver) resourceLoader;
+		if (resourceLoader instanceof ResourcePatternResolver resolver) {
 			Resource[] resources;
 			if (basePath == null) {
 				resources = resolver.getResources(pattern);
@@ -198,12 +197,12 @@ public class FlowDefinitionResourceFactory {
 		}
 		String basePath = removeScheme(this.basePath);
 		String filePath;
-		if (flowResource instanceof ContextResource) {
-			filePath = ((ContextResource) flowResource).getPathWithinContext();
-		} else if (flowResource instanceof ClassPathResource) {
-			filePath = ((ClassPathResource) flowResource).getPath();
-		} else if (flowResource instanceof FileSystemResource) {
-			filePath = truncateFilePath(((FileSystemResource) flowResource).getPath(), basePath);
+		if (flowResource instanceof ContextResource resource) {
+			filePath = resource.getPathWithinContext();
+		} else if (flowResource instanceof ClassPathResource resource) {
+			filePath = resource.getPath();
+		} else if (flowResource instanceof FileSystemResource resource) {
+			filePath = truncateFilePath(resource.getPath(), basePath);
 		} else if (flowResource instanceof UrlResource || flowResource instanceof VfsResource) {
 			try {
 				filePath = truncateFilePath(flowResource.getURL().getPath(), basePath);

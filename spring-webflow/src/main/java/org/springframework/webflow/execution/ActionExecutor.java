@@ -64,8 +64,8 @@ public class ActionExecutor {
 	}
 
 	private static Action getTargetAction(Action action) {
-		if (action instanceof AnnotatedAction) {
-			return getTargetAction(((AnnotatedAction) action).getTargetAction());
+		if (action instanceof AnnotatedAction annotatedAction) {
+			return getTargetAction(annotatedAction.getTargetAction());
 		} else {
 			return action;
 		}

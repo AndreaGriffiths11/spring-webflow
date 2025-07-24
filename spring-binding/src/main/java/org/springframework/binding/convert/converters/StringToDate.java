@@ -107,9 +107,9 @@ public class StringToDate extends StringToObject {
 		Locale locale = determineLocale(this.locale);
 		DateFormat format = DateFormat.getDateInstance(DateFormat.SHORT, locale);
 		format.setLenient(false);
-		if (format instanceof SimpleDateFormat) {
+		if (format instanceof SimpleDateFormat dateFormat) {
 			String pattern = determinePattern(this.pattern);
-			((SimpleDateFormat) format).applyPattern(pattern);
+			dateFormat.applyPattern(pattern);
 		} else {
 			logger.warn("Unable to apply format pattern '" + pattern
 					+ "'; Returned DateFormat is not a SimpleDateFormat");
@@ -128,8 +128,8 @@ public class StringToDate extends StringToObject {
 	}
 
 	private String getPattern(DateFormat format) {
-		if (format instanceof SimpleDateFormat) {
-			return ((SimpleDateFormat) format).toPattern();
+		if (format instanceof SimpleDateFormat dateFormat) {
+			return dateFormat.toPattern();
 		} else {
 			logger.warn("Pattern string cannot be determined because DateFormat is not a SimpleDateFormat");
 			return "defaultDateFormatInstance";

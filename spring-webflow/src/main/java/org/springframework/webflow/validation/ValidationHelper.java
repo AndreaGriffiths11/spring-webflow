@@ -136,12 +136,12 @@ public class ValidationHelper {
 		String stateId = requestContext.getCurrentState().getId();
 		try {
 			Object hintsValue = expr.getValue(requestContext);
-			if (hintsValue instanceof String) {
-				String[] hints = StringUtils.commaDelimitedListToStringArray((String) hintsValue);
+			if (hintsValue instanceof String string) {
+				String[] hints = StringUtils.commaDelimitedListToStringArray(string);
 				return hintResolver.resolveValidationHints(model, flowId, stateId, hints);
 			}
-			else if (hintsValue instanceof Object[]) {
-				return (Object[]) hintsValue;
+			else if (hintsValue instanceof Object[] objects) {
+				return objects;
 			}
 			else {
 				throw new FlowExecutionException(flowId, stateId,
@@ -298,9 +298,7 @@ public class ValidationHelper {
 	}
 
 	private boolean invokeValidatorDefaultValidateMethod(Object validator) {
-		if (validator instanceof Validator) {
-			// Spring Framework Validator type
-			Validator springValidator = (Validator) validator;
+		if (validator instanceof Validator springValidator) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Invoking Spring Validator '" + ClassUtils.getShortName(validator.getClass()) + "'");
 			}
@@ -309,8 +307,8 @@ public class ValidationHelper {
 						model, expressionParser, messageCodesResolver, mappingResults);
 
 				if (this.validationHints != null) {
-					if (springValidator instanceof SmartValidator) {
-						((SmartValidator) springValidator).validate(model, errors, this.validationHints);
+					if (springValidator instanceof SmartValidator smartValidator) {
+						smartValidator.validate(model, errors, this.validationHints);
 					}
 					else {
 						logger.warn("Validation hints provided but validator not an instance of SmartValidator: ["
