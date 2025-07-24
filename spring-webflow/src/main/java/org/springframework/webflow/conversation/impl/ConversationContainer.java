@@ -97,10 +97,10 @@ public class ConversationContainer implements Serializable {
 		if (maxExceeded()) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("The max number of flow executions has been exceeded for the current user. " +
-						"Removing the oldest conversation with id: " + conversations.get(0).getId());
+						"Removing the oldest conversation with id: " + conversations.getFirst().getId());
 			}
 			// end oldest conversation
-			conversations.get(0).end();
+			conversations.getFirst().end();
 		}
 		return conversation;
 	}

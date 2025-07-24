@@ -47,13 +47,13 @@ public class JsfViewTests {
 
 	@Test
 	public void testViewResolution() throws Exception {
-		View view = this.resolver.resolveViewName("intro", new Locale("EN"));
+		View view = this.resolver.resolveViewName("intro", Locale.of("EN"));
 		assertTrue(view instanceof JsfView);
 	}
 
 	@Test
 	public void testViewRender() throws Exception {
-		JsfView view = (JsfView) this.resolver.resolveViewName("intro", new Locale("EN"));
+		JsfView view = (JsfView) this.resolver.resolveViewName("intro", Locale.of("EN"));
 		view.setApplicationContext(new StaticWebApplicationContext());
 		view.setServletContext(new MockServletContext());
 		view.render(new HashMap<>(), new MockHttpServletRequest(), new MockHttpServletResponse());

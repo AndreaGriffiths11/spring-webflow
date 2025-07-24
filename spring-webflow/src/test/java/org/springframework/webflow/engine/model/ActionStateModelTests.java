@@ -62,7 +62,7 @@ public class ActionStateModelTests {
 		child.merge(parent);
 
 		assertNotNull(child.getSecured());
-		assertEquals("foo.bar", ((EvaluateModel) child.getActions().get(0)).getExpression());
+		assertEquals("foo.bar", ((EvaluateModel) child.getActions().getFirst()).getExpression());
 	}
 
 }

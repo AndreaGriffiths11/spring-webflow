@@ -647,8 +647,7 @@ public class XmlFlowModelBuilder implements FlowModelBuilder {
 								+ "' to inherit from", e);
 					}
 					try {
-						if (this.modelLocator instanceof FlowModelHolderLocator) {
-							FlowModelHolderLocator locator = (FlowModelHolderLocator) this.modelLocator;
+						if (this.modelLocator instanceof FlowModelHolderLocator locator) {
 							this.parentHolders.add(locator.getFlowModelHolder(parentFlowId));
 						}
 					} catch (NoSuchFlowModelException e) {

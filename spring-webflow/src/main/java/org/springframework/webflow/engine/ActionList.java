@@ -108,8 +108,8 @@ public class ActionList implements Iterable<Action> {
 	 */
 	public AnnotatedAction getAnnotated(int index) throws IndexOutOfBoundsException {
 		Action action = get(index);
-		if (action instanceof AnnotatedAction) {
-			return (AnnotatedAction) action;
+		if (action instanceof AnnotatedAction annotatedAction) {
+			return annotatedAction;
 		} else {
 			// wrap the action; no annotations will be available
 			return new AnnotatedAction(action);

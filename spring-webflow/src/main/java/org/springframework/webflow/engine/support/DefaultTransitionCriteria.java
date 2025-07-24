@@ -48,8 +48,8 @@ public class DefaultTransitionCriteria implements TransitionCriteria {
 		Object result = expression.getValue(context);
 		if (result == null) {
 			return false;
-		} else if (result instanceof Boolean) {
-			return (Boolean) result;
+		} else if (result instanceof Boolean boolean1) {
+			return boolean1;
 		} else {
 			String eventId = String.valueOf(result);
 			return context.getCurrentEvent().getId().equals(eventId);

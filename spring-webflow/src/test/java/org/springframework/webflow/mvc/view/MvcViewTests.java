@@ -227,7 +227,7 @@ public class MvcViewTests {
 		assertEquals(2, bindBean.getPrimitiveArrayProperty()[1]);
 		assertEquals(3, bindBean.getPrimitiveArrayProperty()[2]);
 		assertEquals(3, bindBean.getListProperty().size());
-		assertEquals("1", bindBean.getListProperty().get(0));
+		assertEquals("1", bindBean.getListProperty().getFirst());
 		assertEquals("2", bindBean.getListProperty().get(1));
 		assertEquals("3", bindBean.getListProperty().get(2));
 		assertFalse(bindBean.validationMethodInvoked);

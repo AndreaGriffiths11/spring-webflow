@@ -170,8 +170,8 @@ public class FlowFacesContext extends FacesContextWrapper {
 		Set<String> clientIds = new LinkedHashSet<>();
 		for (Message message : this.context.getMessageContext().getAllMessages()) {
 			Object source = message.getSource();
-			if (source instanceof String) {
-				clientIds.add((String) source);
+			if (source instanceof String string) {
+				clientIds.add(string);
 			} else if (message.getSource() instanceof FacesMessageSource) {
 				clientIds.add(((FacesMessageSource) source).getClientId());
 			}
@@ -248,8 +248,8 @@ public class FlowFacesContext extends FacesContextWrapper {
 	}
 
 	private FacesMessage asFacesMessage(Message message) {
-		if (message instanceof FlowFacesMessage) {
-			return ((FlowFacesMessage) message).getFacesMessage();
+		if (message instanceof FlowFacesMessage facesMessage) {
+			return facesMessage.getFacesMessage();
 		}
 		FacesMessage.Severity severity = SPRING_SEVERITY_TO_FACES.get(message.getSeverity());
 		if (severity == null) {

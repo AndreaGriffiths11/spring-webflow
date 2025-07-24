@@ -121,8 +121,8 @@ public class FormattedStringToNumber extends StringToObject {
 	// internal helpers
 
 	private String getPattern(NumberFormat format) {
-		if (format instanceof DecimalFormat) {
-			return ((DecimalFormat) format).toPattern();
+		if (format instanceof DecimalFormat decimalFormat) {
+			return decimalFormat.toPattern();
 		} else {
 			logger.warn("Pattern string cannot be determined because NumberFormat is not a DecimalFormat");
 			return "defaultNumberFormatInstance";

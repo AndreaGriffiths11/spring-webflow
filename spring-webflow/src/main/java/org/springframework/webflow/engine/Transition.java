@@ -221,8 +221,8 @@ public class Transition extends AnnotatedObject implements TransitionDefinition 
 						if (logger.isDebugEnabled()) {
 							logger.debug("Exiting state '" + sourceState.getId() + "'");
 						}
-						if (sourceState instanceof TransitionableState) {
-							((TransitionableState) sourceState).exit(context);
+						if (sourceState instanceof TransitionableState state) {
+							state.exit(context);
 						}
 					}
 					targetState.enter(context);

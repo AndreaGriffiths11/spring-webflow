@@ -218,7 +218,7 @@ public class DefaultConversionServiceTests {
 		service.addConverter("princy", new CustomTwoWayConverter());
 		ConversionExecutor executor = service.getConversionExecutor("princy", String[].class, List.class);
 		List<Principal> list = (List<Principal>) executor.execute(new String[] { "princy1", "princy2" });
-		assertEquals("princy1", (list.get(0)).getName());
+		assertEquals("princy1", (list.getFirst()).getName());
 		assertEquals("princy2", (list.get(1)).getName());
 	}
 
@@ -231,7 +231,7 @@ public class DefaultConversionServiceTests {
 		final Principal princy1 = () -> "princy1";
 		final Principal princy2 = () -> "princy2";
 		List<String> p = (List<String>) executor.execute(new Principal[] { princy1, princy2 });
-		assertEquals("princy1", p.get(0));
+		assertEquals("princy1", p.getFirst());
 		assertEquals("princy2", p.get(1));
 	}
 
@@ -325,7 +325,7 @@ public class DefaultConversionServiceTests {
 		service.addConverter("princy", new CustomTwoWayConverter());
 		ConversionExecutor executor = service.getConversionExecutor("princy", String.class, List.class);
 		List<Principal> list = (List<Principal>) executor.execute("princy1");
-		assertEquals("princy1", list.get(0).getName());
+		assertEquals("princy1", list.getFirst().getName());
 	}
 
 	@Test
@@ -335,7 +335,7 @@ public class DefaultConversionServiceTests {
 		service.addConverter("princy", new PrincipalCsvStringToListConverter());
 		ConversionExecutor executor = service.getConversionExecutor("princy", String.class, List.class);
 		List<Principal> list = (List<Principal>) executor.execute("princy1,princy2");
-		assertEquals("princy1", list.get(0).getName());
+		assertEquals("princy1", list.getFirst().getName());
 		assertEquals("princy2", list.get(1).getName());
 	}
 
@@ -360,7 +360,7 @@ public class DefaultConversionServiceTests {
 		ConversionExecutor executor = service.getConversionExecutor("princy", Principal.class, List.class);
 		final Principal princy1 = () -> "princy1";
 		List<String> list = (List<String>) executor.execute(princy1);
-		assertEquals("princy1", list.get(0));
+		assertEquals("princy1", list.getFirst());
 	}
 
 	@Test
@@ -373,7 +373,7 @@ public class DefaultConversionServiceTests {
 		princyList.add("princy1");
 		princyList.add("princy2");
 		List<Principal> list = (List<Principal>) executor.execute(princyList);
-		assertEquals("princy1", list.get(0).getName());
+		assertEquals("princy1", list.getFirst().getName());
 		assertEquals("princy2", list.get(1).getName());
 	}
 
@@ -389,7 +389,7 @@ public class DefaultConversionServiceTests {
 		princyList.add(princy1);
 		princyList.add(princy2);
 		List<String> list = (List<String>) executor.execute(princyList);
-		assertEquals("princy1", list.get(0));
+		assertEquals("princy1", list.getFirst());
 		assertEquals("princy2", list.get(1));
 	}
 
@@ -442,7 +442,7 @@ public class DefaultConversionServiceTests {
 		DefaultConversionService service = new DefaultConversionService();
 		ConversionExecutor executor = service.getConversionExecutor(String[].class, List.class);
 		List<String> result = (List<String>) executor.execute(new String[] { "1", "2", "3" });
-		assertEquals("1", result.get(0));
+		assertEquals("1", result.getFirst());
 		assertEquals("2", result.get(1));
 		assertEquals("3", result.get(2));
 	}
@@ -471,7 +471,7 @@ public class DefaultConversionServiceTests {
 		set.add("2");
 		set.add("3");
 		List<String> result = (List<String>) executor.execute(set);
-		assertEquals("1", result.get(0));
+		assertEquals("1", result.getFirst());
 		assertEquals("2", result.get(1));
 		assertEquals("3", result.get(2));
 	}
@@ -505,7 +505,7 @@ public class DefaultConversionServiceTests {
 		DefaultConversionService service = new DefaultConversionService();
 		ConversionExecutor executor = service.getConversionExecutor(String[].class, LinkedList.class);
 		LinkedList<String> result = (LinkedList<String>) executor.execute(new String[] { "1", "2", "3" });
-		assertEquals("1", result.get(0));
+		assertEquals("1", result.getFirst());
 		assertEquals("2", result.get(1));
 		assertEquals("3", result.get(2));
 	}
@@ -538,7 +538,7 @@ public class DefaultConversionServiceTests {
 		ConversionExecutor executor = service.getConversionExecutor(String.class, List.class);
 		List<String> result = (List<String>) executor.execute("1,2,3");
 		assertEquals(3, result.size());
-		assertEquals("1", result.get(0));
+		assertEquals("1", result.getFirst());
 		assertEquals("2", result.get(1));
 		assertEquals("3", result.get(2));
 	}

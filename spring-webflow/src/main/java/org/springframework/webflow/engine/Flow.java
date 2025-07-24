@@ -585,8 +585,8 @@ public class Flow extends AnnotatedObject implements FlowDefinition {
 	}
 
 	public void destroy() {
-		if (applicationContext != null && applicationContext instanceof ConfigurableApplicationContext) {
-			((ConfigurableApplicationContext) applicationContext).close();
+		if (applicationContext != null && applicationContext instanceof ConfigurableApplicationContext context) {
+			context.close();
 		}
 	}
 

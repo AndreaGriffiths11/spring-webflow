@@ -145,7 +145,7 @@ public abstract class AbstractCachingMapDecorator<K, V> implements Map<K, V>, Se
 			return true;
 		}
 		for (Object mapVal : this.targetMap.values()) {
-			if (mapVal instanceof Reference && value.equals(((Reference) mapVal).get())) {
+			if (mapVal instanceof Reference reference && value.equals(reference.get())) {
 				return true;
 			}
 		}
@@ -159,8 +159,8 @@ public abstract class AbstractCachingMapDecorator<K, V> implements Map<K, V>, Se
 	@SuppressWarnings("unchecked")
 	private V unwrapReturnValue(Object value) {
 		Object returnValue = value;
-		if (returnValue instanceof Reference) {
-			returnValue = ((Reference) returnValue).get();
+		if (returnValue instanceof Reference reference) {
+			returnValue = reference.get();
 		}
 		return (returnValue == NULL_VALUE ? null : (V) returnValue);
 	}
@@ -200,8 +200,8 @@ public abstract class AbstractCachingMapDecorator<K, V> implements Map<K, V>, Se
 		LinkedList<V> values = new LinkedList<>();
 		for (Iterator<Object> it = this.targetMap.values().iterator(); it.hasNext();) {
 			Object value = it.next();
-			if (value instanceof Reference) {
-				value = ((Reference) value).get();
+			if (value instanceof Reference reference) {
+				value = reference.get();
 				if (value == null) {
 					it.remove();
 					continue;
@@ -229,8 +229,8 @@ public abstract class AbstractCachingMapDecorator<K, V> implements Map<K, V>, Se
 		for (Iterator<Entry<K, Object>> it = this.targetMap.entrySet().iterator(); it.hasNext();) {
 			Entry<K, Object> entry = it.next();
 			Object value = entry.getValue();
-			if (value instanceof Reference) {
-				value = ((Reference) value).get();
+			if (value instanceof Reference reference) {
+				value = reference.get();
 				if (value == null) {
 					it.remove();
 					continue;
@@ -282,8 +282,8 @@ public abstract class AbstractCachingMapDecorator<K, V> implements Map<K, V>, Se
 	@SuppressWarnings("unchecked")
 	public V get(Object key) {
 		Object value = this.targetMap.get(key);
-		if (value instanceof Reference) {
-			value = ((Reference) value).get();
+		if (value instanceof Reference reference) {
+			value = reference.get();
 		}
 		if (value == null) {
 			V newValue = create((K) key);

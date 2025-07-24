@@ -82,7 +82,7 @@ public class OneSelectionTrackingListDataModel<T> extends SerializableListDataMo
 
 	public Object getSelectedRow() {
 		if (this.selections.size() == 1) {
-			return this.selections.get(0);
+			return this.selections.getFirst();
 		} else {
 			return null;
 		}

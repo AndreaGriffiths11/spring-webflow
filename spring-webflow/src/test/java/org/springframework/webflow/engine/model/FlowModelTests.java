@@ -57,8 +57,8 @@ public class FlowModelTests {
 
 		child.merge(parent);
 		assertEquals(2, child.getAttributes().size());
-		assertEquals("name", child.getAttributes().get(0).getName());
-		assertEquals("type", child.getAttributes().get(0).getType());
+		assertEquals("name", child.getAttributes().getFirst().getName());
+		assertEquals("type", child.getAttributes().getFirst().getType());
 		assertEquals("name2", child.getAttributes().get(1).getName());
 		assertEquals("type2", child.getAttributes().get(1).getType());
 	}
@@ -94,7 +94,7 @@ public class FlowModelTests {
 
 		child.merge(parent);
 		assertEquals(1, child.getVars().size());
-		assertEquals("value2", child.getVars().get(0).getClassName());
+		assertEquals("value2", child.getVars().getFirst().getClassName());
 	}
 
 	@Test
@@ -140,7 +140,7 @@ public class FlowModelTests {
 
 		child.merge(parent);
 		assertEquals(6, child.getOnStartActions().size());
-		assertNotNull(((EvaluateModel) child.getOnStartActions().get(0)).getResult());
+		assertNotNull(((EvaluateModel) child.getOnStartActions().getFirst()).getResult());
 	}
 
 	@Test
@@ -156,7 +156,7 @@ public class FlowModelTests {
 
 		child.merge(parent);
 		assertEquals(4, child.getStates().size());
-		assertEquals("jsp", ((ViewStateModel) child.getStates().get(0)).getView());
+		assertEquals("jsp", ((ViewStateModel) child.getStates().getFirst()).getView());
 	}
 
 	@Test
@@ -178,7 +178,7 @@ public class FlowModelTests {
 
 		child.merge(parent);
 		assertEquals(3, child.getGlobalTransitions().size());
-		assertEquals("theend", child.getGlobalTransitions().get(0).getTo());
+		assertEquals("theend", child.getGlobalTransitions().getFirst().getTo());
 	}
 
 	@Test
@@ -195,7 +195,7 @@ public class FlowModelTests {
 
 		child.merge(parent);
 		assertEquals(6, child.getOnEndActions().size());
-		assertNotNull(((EvaluateModel) child.getOnEndActions().get(0)).getResult());
+		assertNotNull(((EvaluateModel) child.getOnEndActions().getFirst()).getResult());
 	}
 
 	@Test

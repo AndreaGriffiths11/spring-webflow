@@ -544,7 +544,7 @@ public abstract class AbstractMvcView implements View {
 			expression = expression.substring(index + 1);
 		}
 		BeanWrapperImpl beanWrapper = new BeanWrapperImpl(model);
-		if (!beanWrapper.isReadableProperty(propertyNames.get(0))) {
+		if (!beanWrapper.isReadableProperty(propertyNames.getFirst())) {
 			return false;
 		}
 		for (String propertyName : propertyNames) {

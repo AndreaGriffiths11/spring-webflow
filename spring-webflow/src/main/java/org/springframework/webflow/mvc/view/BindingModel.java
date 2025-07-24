@@ -131,7 +131,7 @@ public class BindingModel extends AbstractErrors implements BindingResult {
 	// Override to ensure use of overridden getFieldErrors(String)
 	public FieldError getFieldError(String field) {
 		List<FieldError> fieldErrors = getFieldErrors(field);
-		return (!fieldErrors.isEmpty() ? fieldErrors.get(0) : null);
+		return (!fieldErrors.isEmpty() ? fieldErrors.getFirst() : null);
 	}
 
 	public Class<?> getFieldType(String field) {
@@ -143,7 +143,7 @@ public class BindingModel extends AbstractErrors implements BindingResult {
 		if (mappingResults != null) {
 			List<MappingResult> results = mappingResults.getResults(new FieldErrorResult(field));
 			if (!results.isEmpty()) {
-				MappingResult fieldError = results.get(0);
+				MappingResult fieldError = results.getFirst();
 				return fieldError.getOriginalValue();
 			}
 		}

@@ -162,8 +162,8 @@ public class FlowExecutionImplFactoryTests {
 		assertSame(flowExecutionKey, flowExecution.getKey());
 		assertSame(keyFactory, flowExecution.getKeyFactory());
 		assertSame(conversationScope, flowExecution.getConversationScope());
-		assertSame(flowExecution.getFlowSessions().get(0).getDefinition(), flowDefinition);
-		assertSame(flowExecution.getFlowSessions().get(0).getDefinition().getState("end"),
+		assertSame(flowExecution.getFlowSessions().getFirst().getDefinition(), flowDefinition);
+		assertSame(flowExecution.getFlowSessions().getFirst().getDefinition().getState("end"),
 				flowDefinition.getState("end"));
 		assertSame(flowExecution.getFlowSessions().get(1).getDefinition(), locator.child);
 		assertSame(flowExecution.getFlowSessions().get(1).getDefinition().getState("state"),

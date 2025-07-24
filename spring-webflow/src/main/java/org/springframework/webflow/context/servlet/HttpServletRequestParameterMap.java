@@ -49,12 +49,11 @@ public class HttpServletRequestParameterMap extends StringKeyedMapAdapter<Object
 	}
 
 	protected Object getAttribute(String key) {
-		if (request instanceof MultipartHttpServletRequest) {
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		if (request instanceof MultipartHttpServletRequest multipartRequest) {
 			List<MultipartFile> data = multipartRequest.getMultiFileMap().get(key);
 			if (data != null && data.size() > 0) {
 				if (data.size() == 1) {
-					return data.get(0);
+					return data.getFirst();
 				} else {
 					return data;
 				}
@@ -79,8 +78,7 @@ public class HttpServletRequestParameterMap extends StringKeyedMapAdapter<Object
 	}
 
 	protected Iterator<String> getAttributeNames() {
-		if (request instanceof MultipartHttpServletRequest) {
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		if (request instanceof MultipartHttpServletRequest multipartRequest) {
 			CompositeIterator<String> iterator = new CompositeIterator<>();
 			iterator.add(multipartRequest.getFileMap().keySet().iterator());
 			iterator.add(getRequestParameterNames());

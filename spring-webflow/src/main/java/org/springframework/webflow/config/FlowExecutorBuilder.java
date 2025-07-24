@@ -196,8 +196,8 @@ public class FlowExecutorBuilder {
 		if (manager == null) {
 			manager = new SessionBindingConversationManager();
 		}
-		if (this.maxFlowExecutions != null && manager instanceof SessionBindingConversationManager) {
-			((SessionBindingConversationManager) manager).setMaxConversations(this.maxFlowExecutions);
+		if (this.maxFlowExecutions != null && manager instanceof SessionBindingConversationManager bindingConversationManager) {
+			bindingConversationManager.setMaxConversations(this.maxFlowExecutions);
 		}
 		return manager;
 	}

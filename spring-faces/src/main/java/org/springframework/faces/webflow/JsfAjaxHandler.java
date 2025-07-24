@@ -92,8 +92,8 @@ public class JsfAjaxHandler extends AbstractAjaxHandler {
 			RenderKit renderKit = factory.getRenderKit(context, RenderKitFactory.HTML_BASIC_RENDER_KIT);
 			responseWriter = renderKit.createResponseWriter(out, "text/xml", encoding);
 		}
-		if (responseWriter instanceof PartialResponseWriter) {
-			return (PartialResponseWriter) responseWriter;
+		if (responseWriter instanceof PartialResponseWriter writer) {
+			return writer;
 		} else {
 			return new PartialResponseWriter(responseWriter);
 		}
